@@ -1,0 +1,137 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+  <div class="content">
+    <div class="container-fluid">
+      <h4 class="page-title">Task Management</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">List of Tasks</div>
+              <div class="card-category">Search, Filter and Sort Your Tasks</div>
+            </div>
+            <br />
+                <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'task-list'%}" method="get">
+                      <div class="input-group">
+                          <input type="text" placeholder="Search tasks..." class="form-control" name="q" value="{{ request.GET.q }}" />
+                          <div class="input-group-append">
+                          <span class="input-group-text">
+                              <i class="la la-search search-icon"></i>
+                          </span>
+                          </div>
+                      </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="pull-right">
+                    <a href="{% url 'task-add' %}" class="btn btn-success btn-rounded">
+                        Add New Task
+                    </a>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="col-md-12 mt-3 mb-3">
+                    <form method="get" action="{% url 'task-list' %}" class="row">
+                        <div class="col-md-3">
+                            <label>Filter by Status:</label>
+                            <select name="status" class="form-control" onchange="this.form.submit()">
+                                <option value="">All Status</option>
+                                {% for status in status_choices %}
+                                    <option value="{{ status }}" {% if request.GET.status == status %}selected{% endif %}>
+                                        {{ status }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Filter by Category:</label>
+                            <select name="category" class="form-control" onchange="this.form.submit()">
+                                <option value="">All Categories</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ category.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Filter by Priority:</label>
+                            <select name="priority" class="form-control" onchange="this.form.submit()">
+                                <option value="">All Priorities</option>
+                                {% for priority in priorities %}
+                                    <option value="{{ priority.id }}" {% if request.GET.priority == priority.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ priority.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Sort by:</label>
+                            <select name="ordering" class="form-control" onchange="this.form.submit()">
+                                <option value="-created_at" {% if request.GET.ordering == "-created_at" %}selected{% endif %}>Newest First</option>
+                                <option value="created_at" {% if request.GET.ordering == "created_at" %}selected{% endif %}>Oldest First</option>
+                                <option value="title" {% if request.GET.ordering == "title" %}selected{% endif %}>Title (A-Z)</option>
+                                <option value="-title" {% if request.GET.ordering == "-title" %}selected{% endif %}>Title (Z-A)</option>
+                                <option value="deadline" {% if request.GET.ordering == "deadline" %}selected{% endif %}>Deadline (Earliest)</option>
+                                <option value="-deadline" {% if request.GET.ordering == "-deadline" %}selected{% endif %}>Deadline (Latest)</option>
+                                <option value="status" {% if request.GET.ordering == "status" %}selected{% endif %}>Status</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+            <div class="card-body">
+              <table class="table table-striped mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.title }}</td>
+                        <td>{{ object.description }}</td>
+                        <td>{{ object.deadline }}</td>
+                        <td>
+                            {% if object.status == "Completed" %}
+                                <span class="badge badge-success">{{ object.status }}</span>
+                            {% elif object.status == "In Progress" %}
+                                <span class="badge badge-info">{{ object.status }}</span>
+                            {% else %}
+                                <span class="badge badge-warning">{{ object.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ object.category }}</td>
+                        <td>{{ object.priority }}</td>
+                        <td>
+                            <a href="{% url 'task-update' object.id %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'task-delete' object.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                        {% empty %}
+                        <tr>
+                        <td colspan="7" style="text-align: center">
+                            <p class="text-sm font-weight-bold mb-0">No Records Found</p>
+                        </td>
+                        </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% include 'includes/pagination.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

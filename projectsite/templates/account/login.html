@@ -1,0 +1,94 @@
+{% load socialaccount %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>PSUSphere Login</title>
+    <!-- SB Admin 2 CSS -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="p-5">
+                            <div class="text-center"><h1 class="h4 text-gray-900 mb-4">Welcome to PSUSphere</h1></div>
+                            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="tab-login" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pillslogin" aria-selected="true">Login</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="tab-register" data-toggle="pill" href="#pills-register" role="tab" aria-controls="pillsregister" aria-selected="false">Register</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                                    <form method="post" action="{% url 'account_login' %}">
+                                        {% csrf_token %}
+                                        <div class="text-center mb-3">
+                                            <a href="{% provider_login_url 'google' %}" class="btn btn-google btn-user btn-block mb-2">
+                                                <i class="fab fa-google fa-fw"></i> Sign in with Google
+                                            </a>
+                                            <a href="{% provider_login_url 'github' %}" class="btn btn-github btn-user btn-block mb-2">
+                                                <i class="fab fa-github fa-fw"></i> Sign in with Github
+                                            </a>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="login" id="id_login" class="form-control form-control-user" placeholder="Email or Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="id_password" class="form-control form-control-user" placeholder="Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input class="custom-control-input" type="checkbox" id="loginCheck" checked>
+                                                <label class="custom-control-label" for="loginCheck">Remember me</label>
+                                            </div>
+                                        </div>
+                                        {% if form.non_field_errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {% for error in form.non_field_errors %}
+                                                <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-4">Sign in</button>
+                                        <a href="{% url 'account_reset_password' %}" class="small">Forgot password?</a>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                                    <form method="post" action="{% url 'account_signup' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="username" id="registerUsername" class="form-control form-control-user" placeholder="Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="registerEmail" class="form-control form-control-user" placeholder="Email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password1" id="registerPassword" class="form-control form-control-user" placeholder="Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password2" id="registerRepeatPassword" class="form-control form-control-user" placeholder="Repeat password" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-3">Register</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+</body>
+</html>
