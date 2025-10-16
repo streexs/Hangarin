@@ -17,13 +17,13 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="p-5">
-                            <div class="text-center"><h1 class="h4 text-gray-900 mb-4">Welcome to PSUSphere</h1></div>
+                            <div class="text-center"><h1 class="h4 text-gray-900 mb-4">Welcome to Hangarin</h1></div>
                             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="tab-login" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pillslogin" aria-selected="true">Login</a>
+                                    <a class="nav-link active btn-success" id="tab-login" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pillslogin" aria-selected="true">Login</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="tab-register" data-toggle="pill" href="#pills-register" role="tab" aria-controls="pillsregister" aria-selected="false">Register</a>
+                                    <a class="nav-link btn-success" id="tab-register" data-toggle="pill" href="#pills-register" role="tab" aria-controls="pillsregister" aria-selected="false">Register</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -33,9 +33,6 @@
                                         <div class="text-center mb-3">
                                             <a href="{% provider_login_url 'google' %}" class="btn btn-google btn-user btn-block mb-2">
                                                 <i class="fab fa-google fa-fw"></i> Sign in with Google
-                                            </a>
-                                            <a href="{% provider_login_url 'github' %}" class="btn btn-github btn-user btn-block mb-2">
-                                                <i class="fab fa-github fa-fw"></i> Sign in with Github
                                             </a>
                                         </div>
                                         <div class="form-group">
@@ -57,7 +54,7 @@
                                             {% endfor %}
                                         </div>
                                         {% endif %}
-                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-4">Sign in</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-4 btn-success">Sign in</button>
                                         <a href="{% url 'account_reset_password' %}" class="small">Forgot password?</a>
                                     </form>
                                 </div>
@@ -76,7 +73,7 @@
                                         <div class="form-group">
                                             <input type="password" name="password2" id="registerRepeatPassword" class="form-control form-control-user" placeholder="Repeat password" required>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-3">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mb-3 btn-success">Register</button>
                                     </form>
                                 </div>
                             </div>

@@ -22,9 +22,9 @@
                             </div>
                             <form method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-primary btn-user btn-block mb-3">Continue with {{ provider.name }}</button>
+                                <button type="submit" class="btn btn-primary btn-user btn-block mb-3 btn-success">Continue with {{ provider.name }}</button>
                             </form>
-                            <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-user btn-block">Cancel</a>
+                            <a href="{% url 'account_login' %}" class="btn btn-outline-secondary btn-user btn-block btn-danger">Cancel</a>
                         </div>
                     </div>
                 </div>

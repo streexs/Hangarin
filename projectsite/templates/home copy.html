@@ -1,8 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Dashboard</h4>
+        <h4 class="page-title">Home</h4>
         <div class="row">
+            
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -11,9 +14,7 @@
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     <p class="card-category">Total Tasks</p>
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <h4 class="card-title">{{total_tasks}}</h4>
-                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><h4 class="card-title">{{total_tasks}}</h4></div>
                             </div>
                             <div class="col-auto">
                                 <i class="la la-tasks fa-2x text-gray-300"></i>
@@ -22,6 +23,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
@@ -30,9 +32,7 @@
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     <p class="card-category">Completed Tasks</p>
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <h4 class="card-title">{{completed_tasks}}</h4>
-                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><h4 class="card-title">{{completed_tasks}}</h4></div>
                             </div>
                             <div class="col-auto">
                                 <i class="la la-check-circle fa-2x text-gray-300"></i>
@@ -41,6 +41,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-dark shadow h-100 py-2">
                     <div class="card-body">
@@ -58,31 +59,52 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                <p class="card-category">Total SubTasks</p>
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    <p class="card-category">Total SubTasks</p>
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_subtasks }}</div>
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_subtasks }}</div>
+                            <div class="col-auto">
+                                <i class="la la-list-ul fa-2x text-gray-300"></i>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="la la-list-ul fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Hangarin Task Management Dashboard</div>
+                        <div class="card-category">Overview of your tasks and productivity</div>
+                    </div>
+                    <div class="card-body">
+                        <h5>Welcome to Hangarin!</h5>
+                        <p>Manage your tasks efficiently with our comprehensive task management system.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <a href="{% url 'task-list' %}" class="btn btn-primary btn-block">View All Tasks</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'task-add' %}" class="btn btn-success btn-block">Add New Task</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{% url 'category-list' %}" class="btn btn-info btn-block">Manage Categories</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <div class="card mb-4 w-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Hangarin</h6>
-                </div>
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium temporibus qui necessitatibus, omnis iste quod blanditiis fugiat fuga voluptatibus modi quae vero asperiores animi eius repellendus perferendis dolore, voluptas dolor.
-                </div>
-            </div>
-        </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
